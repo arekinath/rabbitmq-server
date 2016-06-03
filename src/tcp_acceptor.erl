@@ -77,6 +77,9 @@ handle_info({inet_async, LSock, Ref, {ok, Sock}},
                                    [Reason])
     end,
 
+    {_, Len} = erlang:process_info(whereis(rabbit_amqqueue_sup), message_queue_len),
+    timer:sleep(Len),
+
     %% accept more
     accept(State);
 
